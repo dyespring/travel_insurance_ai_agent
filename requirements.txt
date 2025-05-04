@@ -1,0 +1,25 @@
+# Core
+langchain
+langchain-core
+langchain-community
+fastapi
+uvicorn
+
+# RAG Engine
+sentence-transformers
+faiss-cpu  # or faiss-gpu if you have CUDA
+transformers
+torch
+
+# Recommendation
+lightfm
+scikit-learn
+
+# Sentiment
+vaderSentiment
+transformers
+
+# Data
+redis
+psycopg2-binary
+kafka-python
