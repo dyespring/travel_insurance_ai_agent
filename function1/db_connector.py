@@ -1,6 +1,6 @@
 import os
+"pip install psycopg2-binary"
 import psycopg2
-import redis
 from dotenv import load_dotenv
 
 load_dotenv()
