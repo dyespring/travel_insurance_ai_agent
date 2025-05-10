@@ -16,7 +16,6 @@ lightfm
 scikit-learn
 
 # Sentiment
-vaderSentiment
 transformers
 
 # Data
