@@ -1,13 +1,11 @@
 # Core
-langchain
-langchain-core
-langchain-community
+langchain          # pulls in langchain-core & langchain-community
 fastapi
 uvicorn
 
-# RAG Engine
+# RAG / Embeddings / LLMs
 sentence-transformers
-faiss-cpu  # or faiss-gpu if you have CUDA
+faiss-cpu          # or faiss-gpu if you have CUDA
 transformers
 torch
 
@@ -15,10 +13,7 @@ torch
 lightfm
 scikit-learn
 
-# Sentiment
-transformers
-
-# Data
+# Data / infra
 redis
 psycopg2-binary
 kafka-python
