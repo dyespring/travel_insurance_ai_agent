@@ -71,19 +71,39 @@ def fetch_all_reviews(data_id, api_key, max_pages=3):
     print(f"🗒️ Total reviews fetched: {len(all_reviews)}")
     return all_reviews
 # === STEP 2: Print formatted reviews ===
-def print_reviews(reviews):
+def print_reviews_and_average(reviews):
+    ratings = []
+
     for i, r in enumerate(reviews, 1):
+        rating = r.get('rating')
+        if isinstance(rating, (int, float)):
+            ratings.append(rating)
+
         print(f"\n--- Review #{i} ---")
-        print(f"⭐ Rating: {r.get('rating')}")
-        print(f"👤 User: {r.get('username')}")
+        print(f"⭐ Rating: {rating}")
+        print(f"👤 User: {r.get('username') or r.get('user', {}).get('name', 'Unknown')}")
         print(f"🗓️ Date: {r.get('date')}")
-        print(f"📝 Review: {r.get('description')}")
+        print(f"📝 Review: {r.get('extracted_snippet', {}).get('original') or r.get('text')}")
+
+    if ratings:
+        average = round(sum(ratings) / len(ratings), 2)
+        print(f"\n📊 Average Rating: {average} ⭐ (based on {len(ratings)} reviews)")
+    else:
+        print("\n⚠️ No valid ratings to calculate average.")
+
 # Add this function before main
 def extract_cleaned_descriptions(reviews):
     def clean(text):
         return text.lower().strip()
 
-    return [clean(r["description"]) for r in reviews if "description" in r and r["description"].strip()]
+    descriptions = []
+    for r in reviews:
+        # Try to get the full original review text
+        text = r.get("extracted_snippet", {}).get("original") or r.get("text")
+        if text and text.strip():
+            descriptions.append(clean(text))
+    return descriptions
+
 
 # Step 3: Sentiment Analysis
 def analyze_sentiment(texts, tokenizer, model):
@@ -98,13 +118,44 @@ def analyze_sentiment(texts, tokenizer, model):
     
     return labels, probs.tolist()
 # Step 4: Summarize Reviews
-def summarize_reviews(texts, summarizer, max_chunk_length=1000):
-    if not texts:
-        return "No valid reviews to summarize."
 
-    combined_text = " ".join(texts)[:max_chunk_length]
-    summary = summarizer(combined_text, max_length=45, min_length=20, do_sample=False)
-    return summary[0]['summary_text']
+def summarize_reviews_chunked(texts, summarizer, chunk_char_limit=800, summary_max_len=80):
+    chunks = []
+    current_chunk = ""
+
+    for text in texts:
+        if len(current_chunk) + len(text) <= chunk_char_limit:
+            current_chunk += text + " "
+        else:
+            chunks.append(current_chunk.strip())
+            current_chunk = text + " "
+
+    if current_chunk:
+        chunks.append(current_chunk.strip())
+
+    print(f"📦 Splitting into {len(chunks)} chunks for summarization...")
+
+    summaries = []
+    for i, chunk in enumerate(chunks, 1):
+        print(f"📝 Summarizing chunk #{i}...")
+        result = summarizer(
+            chunk,
+            max_length=summary_max_len,
+            min_length=30,
+            do_sample=False
+        )
+        summaries.append(result[0]["summary_text"])
+
+    # Optionally, summarize the summaries:
+    final_input = " ".join(summaries)
+    final_summary = summarizer(
+        final_input,
+        max_length=100,
+        min_length=40,
+        do_sample=False
+    )[0]["summary_text"]
+
+    return final_summary
 
 # === MAIN ===
 def main():
@@ -120,36 +171,37 @@ def main():
         print("\n❌ No data_id or reviews to show.")
         return
 
-    print_reviews(all_reviews)
-    # cleaned_texts = extract_cleaned_descriptions(all_reviews)
+    print_reviews_and_average(all_reviews)
+    cleaned_texts = extract_cleaned_descriptions(all_reviews)
 
-    # if not cleaned_texts:
-    #     print("❌ No valid cleaned review texts to analyze.")
-    #     return
+    if not cleaned_texts:
+        print("❌ No valid cleaned review texts to analyze.")
+        return
 
-    # print("\n🧹 Cleaned review texts for RoBERTa:")
-    # for i, text in enumerate(cleaned_texts, 1):
-    #     print(f"{i}. {text}")
+    print("\n🧹 Cleaned review texts for RoBERTa:")
+    for i, text in enumerate(cleaned_texts, 1):
+        print(f"{i}. {text}")
 
-    # print("\n📦 Loading models...")
-    # roberta_tokenizer = AutoTokenizer.from_pretrained(ROBERTA_MODEL)
-    # roberta_model = AutoModelForSequenceClassification.from_pretrained(ROBERTA_MODEL)
-    # summarizer = pipeline("summarization", model=T5_MODEL)
+    print("\n📦 Loading models...")
+    roberta_tokenizer = AutoTokenizer.from_pretrained(ROBERTA_MODEL)
+    roberta_model = AutoModelForSequenceClassification.from_pretrained(ROBERTA_MODEL)
+    summarizer = pipeline("summarization", model=T5_MODEL)
 
-    # print("🔍 Analyzing sentiment...")
-    # sentiments, _ = analyze_sentiment(cleaned_texts, roberta_tokenizer, roberta_model)
+    print("🔍 Analyzing sentiment...")
+    sentiments, _ = analyze_sentiment(cleaned_texts, roberta_tokenizer, roberta_model)
 
-    # print("🧠 Summarizing reviews...")
-    # summary = summarize_reviews(cleaned_texts, summarizer)
+    print("🧠 Summarizing reviews...")
+    summary = summarize_reviews_chunked(cleaned_texts, summarizer)
 
-    # print("\n📊 Sentiment Distribution:")
-    # sentiment_map = {0: "Negative", 1: "Neutral", 2: "Positive"}
-    # counts = Counter(sentiments)
-    # for label, count in counts.items():
-    #     print(f"{sentiment_map.get(label, label)}: {count}")
+    print("\n📊 Sentiment Distribution:")
+    sentiment_map = {0: "Negative", 1: "Neutral", 2: "Positive"}
+    counts = Counter(sentiments)
+    for label, count in counts.items():
+        print(f"{sentiment_map.get(label, label)}: {count}")
 
-    # print("\n📝 Summary:")
-    # print(summary)
+    print("\n📝 Summary:")
+    print(summary)
+
 
 # === Run it ===
 if __name__ == "__main__":
