@@ -1,0 +1,20 @@
+# Core
+langchain          # pulls in langchain-core & langchain-community
+fastapi
+uvicorn
+flask
+dotenv
+# RAG / Embeddings / LLMs
+sentence-transformers
+faiss-cpu          # or faiss-gpu if you have CUDA
+transformers
+torch
+
+# Recommendation
+lightfm
+scikit-learn
+
+# Data / infra
+redis
+psycopg2-binary
+kafka-python
