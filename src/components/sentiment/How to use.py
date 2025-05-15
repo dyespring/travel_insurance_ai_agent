@@ -22,4 +22,4 @@ def do_reviews(company_name: str):
 
 # example call
 if __name__ == "__main__":
-    do_reviews("Statue of Liberty")
+    do_reviews("CBH Group Metro Grain Centre")
