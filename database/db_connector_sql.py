@@ -74,20 +74,27 @@ def insert_product(connection, productID, agency, agency_type, distribution_chan
 
 # Bulk Insert From CSV
 
-# import csv
+import csv
 
-# def insert_products_from_csv(conn, filepath):
-#     with open(filepath, newline='') as f:
-#         reader = csv.reader(f)
-#         next(reader)  # Skip header
-#         for row in reader:
-#             # Convert appropriate values (e.g., int, float)
-#             row[0] = int(row[0])                  # id
-#             row[6] = int(row[6])                  # duration
-#             row[8] = float(row[8])                # net_sale
-#             row[9] = float(row[9])                # commission
-#             row[11] = int(row[11])                # age
-#             insert_product(conn, row)
+def insert_products_from_csv(conn, filepath):
+    with open(filepath, newline='') as f:
+        reader = csv.reader(f)
+        next(reader)  # Skip header
+        for row in reader:
+            # Convert appropriate values (e.g., int, float)
+            row[0] = int(row[0])                  # id
+            row[6] = int(row[6])                  # Agency
+            row[8] = float(row[8])                # Agency Type
+            row[9] = float(row[9])                # Distribution Channel
+            row[11] = int(row[11])                # Product Name
+            row[12] = int(row[12])                # Claim
+            row[13] = int(row[13])                # Duration
+            row[14] = float(row[14])              # Destination
+            row[15] = float(row[15])              # Net Sale
+            row[16] = float(row[16])              # Commission
+            row[17] = int(row[17])                # Gender
+            row[18] = int(row[18])                # Age
+            insert_product(conn, row)
 
 # Usage:
 # insert_products_from_csv(conn, 'dataset_sample_x.csv')

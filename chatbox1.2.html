@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel Insurance Assistant - COS60011</title>
+    <style>
+        /* Root color variables for consistent theming */
+        :root {
+            --primary-color: #2A5CAA;
+            --secondary-color: #F0F4F8;
+        }
+
+        /* Page base style */
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--secondary-color);
+        }
+
+        /* Header layout: logo + course code */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        /* Logo placeholder block */
+        .logo-placeholder {
+            width: 176.5px;
+            height: 89px;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        /* Course code text styling */
+        .course-code {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* Main chat container box */
+        .chat-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+
+        /* Chat history box with scroll */
+        .chat-history {
+            height: 500px;
+            overflow-y: auto;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Common message style */
+        .message {
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 8px;
+            max-width: 70%;
+        }
+
+        /* User message style */
+        .user-message {
+            background: var(--primary-color);
+            color: white;
+            margin-left: auto;
+        }
+
+        /* Bot message style */
+        .bot-message {
+            background: #f1f1f1;
+            margin-right: auto;
+        }
+
+        /* Input area styling */
+        .input-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Text input field */
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        /* Send button */
+        button {
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* Button hover effect */
+        button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <img src="logo-long-full.jpg" alt="Logo" class="logo-placeholder">
+
+        <div class="course-code">COS60011</div>
+    </div>
+
+    <!-- Chat Area -->
+    <div class="chat-container">
+        <div class="chat-history" id="chatHistory">
+            <div class="message bot-message">
+                Welcome to the Smart Travel Insurance Assistant! How can I help you today?
+            </div>
+        </div>
+        
+        <!-- User input -->
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Type your travel insurance question...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Simulated AI response (replace with actual API later)
+        async function getAIResponse(userMessage) {
+            // Placeholder for future AI model integration:
+            // const response = await fetch('/api/chat', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ message: userMessage })
+            // });
+            // return await response.json();
+
+            // Simulated responses based on keywords
+            const responses = {
+                "Insurance Types": "We offer the following types: 1. Short-Term Travel Insurance 2. Long-Term Insurance 3. Family Coverage 4. High-Risk Sports Insurance",
+                "Claims Process": "Claim process: 1. Submit documents online 2. Manual review (1-3 business days) 3. Payment issued",
+                "default": "Our standard coverage includes: medical emergencies, trip cancellation, and lost luggage. Would you like more details?"
+            };
+
+            // Wait for simulated delay
+            await new Promise(resolve => setTimeout(resolve, 800));
+
+            // Return response object
+            return { 
+                response: responses[userMessage] || responses["default"],
+                suggestions: ["Insurance Types", "Claims Process", "Coverage"]
+            };
+        }
+
+        // Handle user input and response logic
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const userMessage = input.value.trim();
+            if (!userMessage) return;
+
+            // Show user message in chat
+            addMessage(userMessage, 'user');
+            input.value = '';
+
+            // Get AI response and show it
+            const response = await getAIResponse(userMessage);
+            addMessage(response.response, 'bot');
+        }
+
+        // Append message to chat history
+        function addMessage(text, sender) {
+            const history = document.getElementById('chatHistory');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            messageDiv.textContent = text;
+            history.appendChild(messageDiv);
+            history.scrollTop = history.scrollHeight; // Auto scroll to latest
+        }
+
+        // Support "Enter" key to send message
+        document.getElementById('userInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+    </script>
+</body>
+</html>
+<!-- End of HTML Document -->
