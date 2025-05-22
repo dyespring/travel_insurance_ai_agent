@@ -1,0 +1,3 @@
+{
+  "python.analysis.extraPaths": ["./database/response_table_"]
+}

@@ -1,0 +1,10 @@
+numpy
+torch
+transformers
+sentence-transformers
+langchain
+faiss-cpu
+serpapi
+flask
+pdfplumber
+langdetect
