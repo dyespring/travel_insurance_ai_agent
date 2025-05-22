@@ -68,7 +68,7 @@
     .main-content {
       padding: 30px;
       text-align: center;
-      color: #8b8989;
+      color: #f0f0f0;
     }
 
     .main-content h2 {
@@ -78,14 +78,14 @@
     .main-content p {
       max-width: 800px;
       margin: 0 auto;
-      color: #ffffff;
+      color: #ccc;
     }
 
     /* === Chat Container === */
     .chat-container {
       max-width: 800px;
       margin: 0 auto;
-      background: #cfcfcf; /* Brighter chat box for contrast */
+      background: #fdfdfd; /* Brighter chat box for contrast */
       border-radius: 15px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.12);
       padding: 20px;
@@ -157,7 +157,7 @@
 
     .suggestion-buttons .suggest-btn {
       padding: 8px 16px;
-      background-color: #f7f7f7;
+      background-color: #eeeeee;
       color: #333;
       border: 1px solid #ccc;
       border-radius: 20px;
@@ -175,7 +175,7 @@
       max-width: 800px;
       margin: 30px auto;
       padding: 20px;
-      background: #c6c6c6;
+      background: #fff;
       border-radius: 10px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
@@ -199,7 +199,7 @@
 
     /* === Footer === */
     footer {
-      background-color: #848484;
+      background-color: #f1f1f1;
       padding: 10px 20px;
       text-align: center;
       font-size: 14px;
@@ -270,4 +270,62 @@
     </div>
     <div class="qa-item">
       <strong>How do I contact support abroad?</strong>
-      <span>Call the global hotline listed in your policy email or use this as
+      <span>Call the global hotline listed in your policy email or use this assistant for non-urgent help.</span>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Smart Travel Insurance Assistant. All rights reserved.
+  </footer>
+
+  <!-- JavaScript section for chatbot logic -->
+  <script>
+    // Simulated AI response logic (replace with actual API if needed)
+    async function getAIResponse(userMessage) {
+      const responses = {
+        "Insurance Types": "We offer: Short-Term, Long-Term, Family, and High-Risk Sports Insurance.",
+        "How do I file a claim?": "To file a claim: Submit documents online, wait 1–3 business days, then receive payment.",
+        "What is covered in the standard plan?": "Standard coverage includes: medical emergencies, trip cancellation, lost luggage.",
+        "default": "We cover medical emergencies, trip cancellations, and lost luggage. Ask me for more details."
+      };
+      await new Promise(resolve => setTimeout(resolve, 800)); // Simulated delay
+      return {
+        response: responses[userMessage] || responses["default"]
+      };
+    }
+
+    // Handle send button click
+    async function sendMessage() {
+      const input = document.getElementById('userInput');
+      const userMessage = input.value.trim();
+      if (!userMessage) return;
+      addMessage(userMessage, 'user');
+      input.value = '';
+      const response = await getAIResponse(userMessage);
+      addMessage(response.response, 'bot');
+    }
+
+    // Add message to chat area
+    function addMessage(text, sender) {
+      const history = document.getElementById('chatHistory');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${sender}-message`;
+      messageDiv.textContent = text;
+      history.appendChild(messageDiv);
+      history.scrollTop = history.scrollHeight;
+    }
+
+    // Handle suggestion button click
+    function handleSuggestion(text) {
+      document.getElementById('userInput').value = text;
+      sendMessage();
+    }
+
+    // Allow pressing Enter to send message
+    document.getElementById('userInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+  </script>
+</body>
+</html>
