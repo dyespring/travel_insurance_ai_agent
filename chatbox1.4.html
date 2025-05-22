@@ -6,20 +6,21 @@
   <title>Smart Travel Insurance Assistant - COS60011</title>
 
   <style>
-    /* === Color Theme === */
+    /* === Color Theme Customization === */
     :root {
-      --primary-color: #B22222;       /* Red tone */
-      --secondary-color: #1e1e1e;     /* Dark grey background */
-      --dark-color: #222222;          /* For nav */
-      --user-bubble: #B22222;         /* User message bubble */
-      --bot-bubble: #f0f0f0;          /* Bot message bubble */
+      --primary-color: #FF0000;       /* Bright red for buttons */
+      --secondary-color: #252525;     /* Background color */
+      --dark-color: #414141;          /* Top nav background */
+      --user-bubble: #AF0404;         /* User chat bubble */
+      --bot-bubble: #f0f0f0;          /* Bot chat bubble */
+      --timestamp-color: #999999;     /* Timestamp text */
     }
 
-    /* === Page Base === */
+    /* === Base Page Styling === */
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
       margin: 0;
-      background-color: var(--secondary-color); /* Dark background */
+      background-color: var(--secondary-color);
     }
 
     /* === Top Navigation Bar === */
@@ -44,7 +45,7 @@
       font-weight: bold;
     }
 
-    /* === Header Section: Logo + Course Code === */
+    /* === Header: Logo + Course Code === */
     .header {
       display: flex;
       justify-content: space-between;
@@ -64,7 +65,7 @@
       color: var(--primary-color);
     }
 
-    /* === Main Description Block === */
+    /* === Intro Text Section === */
     .main-content {
       padding: 30px;
       text-align: center;
@@ -81,11 +82,11 @@
       color: #ccc;
     }
 
-    /* === Chat Container === */
+    /* === Chat UI Container === */
     .chat-container {
       max-width: 800px;
       margin: 0 auto;
-      background: #fdfdfd; /* Brighter chat box for contrast */
+      background: #fdfdfd;
       border-radius: 15px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.12);
       padding: 20px;
@@ -107,6 +108,7 @@
       border-radius: 8px;
       max-width: 70%;
       font-size: 0.95em;
+      position: relative;
     }
 
     .user-message {
@@ -119,6 +121,14 @@
       background: var(--bot-bubble);
       color: #222;
       margin-right: auto;
+    }
+
+    .timestamp {
+      display: block;
+      font-size: 0.7em;
+      color: var(--timestamp-color);
+      margin-top: 4px;
+      text-align: right;
     }
 
     /* === Input Section === */
@@ -147,7 +157,7 @@
       opacity: 0.9;
     }
 
-    /* === Suggestion Buttons === */
+    /* === Suggested Questions === */
     .suggestion-buttons {
       margin-top: 15px;
       display: flex;
@@ -170,7 +180,7 @@
       background-color: #ddd;
     }
 
-    /* === FAQ Section === */
+    /* === Static FAQ Section === */
     .qa-section {
       max-width: 800px;
       margin: 30px auto;
@@ -199,11 +209,11 @@
 
     /* === Footer === */
     footer {
-      background-color: #f1f1f1;
+      background-color: #000000;
       padding: 10px 20px;
       text-align: center;
       font-size: 14px;
-      color: #555;
+      color: #959292;
       border-top: 1px solid #ddd;
       margin-top: 30px;
     }
@@ -212,7 +222,13 @@
 
 <body>
 
-  <!-- Top Navigation Bar -->
+  <!-- Header -->
+  <div class="header">
+    <img src="logo-long-full.jpg" alt="Logo" class="logo-placeholder">
+    <div class="course-code">COS60011</div>
+  </div>
+
+  <!-- Navigation -->
   <div class="navbar">
     <h1>Smart Travel Assistant</h1>
     <div class="nav-links">
@@ -222,42 +238,34 @@
     </div>
   </div>
 
-  <!-- Header Section with Logo and Course Code -->
-  <div class="header">
-    <img src="logo-long-full.jpg" alt="Logo" class="logo-placeholder">
-    <div class="course-code">COS60011</div>
-  </div>
-
-  <!-- Welcome Text Block -->
+  <!-- Welcome Section -->
   <div class="main-content">
     <h2>Smart Help for Smart Travellers</h2>
     <p>Your personal travel insurance guide — ask anything about your policy, claims, or what’s covered before you go!</p>
   </div>
 
-  <!-- Chat UI Section -->
+  <!-- Chat UI -->
   <div class="chat-container">
-    <!-- Chat history area -->
     <div class="chat-history" id="chatHistory">
       <div class="message bot-message">
         Welcome to the Smart Travel Insurance Assistant! How can I help you today?
+        <span class="timestamp">--:--</span>
       </div>
     </div>
 
-    <!-- User input + Send button -->
     <div class="input-container">
       <input type="text" id="userInput" placeholder="Ask me about coverage, claims, or emergencies...">
       <button onclick="sendMessage()">Send</button>
     </div>
 
-    <!-- Suggested quick-question buttons -->
     <div class="suggestion-buttons">
-      <button class="suggest-btn" onclick="handleSuggestion('What types of insurance are available?')">Insurance Types</button>
+      <button class="suggest-btn" onclick="handleSuggestion('Insurance Types')">Insurance Types</button>
       <button class="suggest-btn" onclick="handleSuggestion('How do I file a claim?')">Claims Process</button>
       <button class="suggest-btn" onclick="handleSuggestion('What is covered in the standard plan?')">Coverage Details</button>
     </div>
   </div>
 
-  <!-- FAQ section with static Q&A -->
+  <!-- FAQ -->
   <div class="qa-section">
     <h3>Frequently Asked Questions</h3>
     <div class="qa-item">
@@ -279,41 +287,67 @@
     &copy; 2025 Smart Travel Insurance Assistant. All rights reserved.
   </footer>
 
-  <!-- JavaScript section for chatbot logic -->
+  <!-- JavaScript -->
   <script>
-    // Simulated AI response logic (replace with actual API if needed)
-    async function getAIResponse(userMessage) {
-      const responses = {
-        "Insurance Types": "We offer: Short-Term, Long-Term, Family, and High-Risk Sports Insurance.",
-        "How do I file a claim?": "To file a claim: Submit documents online, wait 1–3 business days, then receive payment.",
-        "What is covered in the standard plan?": "Standard coverage includes: medical emergencies, trip cancellation, lost luggage.",
-        "default": "We cover medical emergencies, trip cancellations, and lost luggage. Ask me for more details."
-      };
-      await new Promise(resolve => setTimeout(resolve, 800)); // Simulated delay
-      return {
-        response: responses[userMessage] || responses["default"]
-      };
+    // Get current time in HH:mm format
+    function getCurrentTime() {
+      const now = new Date();
+      return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
 
-    // Handle send button click
-    async function sendMessage() {
-      const input = document.getElementById('userInput');
-      const userMessage = input.value.trim();
-      if (!userMessage) return;
-      addMessage(userMessage, 'user');
-      input.value = '';
-      const response = await getAIResponse(userMessage);
-      addMessage(response.response, 'bot');
-    }
-
-    // Add message to chat area
+    // Add a message to the chat window with timestamp
     function addMessage(text, sender) {
       const history = document.getElementById('chatHistory');
       const messageDiv = document.createElement('div');
       messageDiv.className = `message ${sender}-message`;
-      messageDiv.textContent = text;
+      messageDiv.innerHTML = `
+        ${text}
+        <span class="timestamp">${getCurrentTime()}</span>
+      `;
       history.appendChild(messageDiv);
       history.scrollTop = history.scrollHeight;
+    }
+
+    // Simulate AI response with fallback keyword detection and API placeholder
+    async function getAIResponse(userMessage) {
+      const responses = {
+        "Insurance Types": "We offer: Short-Term, Long-Term, Family, and High-Risk Sports Insurance.",
+        "How do I file a claim?": "To file a claim: Submit documents online, wait 1–3 business days, then receive payment.",
+        "What is covered in the standard plan?": "Standard coverage includes: medical emergencies, trip cancellation, lost luggage."
+      };
+
+      if (responses[userMessage]) {
+        return { response: responses[userMessage] };
+      }
+
+      // Placeholder for real AI API integration
+      try {
+        const res = await fetch("https://your-backend-api/chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ message: userMessage })
+        });
+
+        const data = await res.json();
+        return { response: data.reply || "Sorry, I didn't understand that." };
+      } catch (error) {
+        return { response: "⚠️ Unable to connect to the assistant. Please try again later." };
+      }
+    }
+
+    // Handle send button or Enter key
+    async function sendMessage() {
+      const input = document.getElementById('userInput');
+      const userMessage = input.value.trim();
+      if (!userMessage) return;
+
+      addMessage(userMessage, 'user');
+      input.value = '';
+
+      const reply = await getAIResponse(userMessage);
+      addMessage(reply.response, 'bot');
     }
 
     // Handle suggestion button click
@@ -322,10 +356,11 @@
       sendMessage();
     }
 
-    // Allow pressing Enter to send message
+    // Enable sending by pressing Enter key
     document.getElementById('userInput').addEventListener('keypress', (e) => {
       if (e.key === 'Enter') sendMessage();
     });
   </script>
+
 </body>
 </html>
