@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Travel Insurance Assistant - COS60011</title>
+
+  <style>
+    /* === Color Theme === */
+    :root {
+      --primary-color: #B22222;       /* Red tone */
+      --secondary-color: #1e1e1e;     /* Dark grey background */
+      --dark-color: #222222;          /* For nav */
+      --user-bubble: #B22222;         /* User message bubble */
+      --bot-bubble: #f0f0f0;          /* Bot message bubble */
+    }
+
+    /* === Page Base === */
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      background-color: var(--secondary-color); /* Dark background */
+    }
+
+    /* === Top Navigation Bar === */
+    .navbar {
+      background-color: var(--dark-color);
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar h1 {
+      margin: 0;
+      font-size: 1.5em;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+    }
+
+    /* === Header Section: Logo + Course Code === */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px 0 30px;
+    }
+
+    .logo-placeholder {
+      width: 15vw;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .course-code {
+      font-weight: bold;
+      font-size: 1.2em;
+      color: var(--primary-color);
+    }
+
+    /* === Main Description Block === */
+    .main-content {
+      padding: 30px;
+      text-align: center;
+      color: #8b8989;
+    }
+
+    .main-content h2 {
+      color: var(--primary-color);
+    }
+
+    .main-content p {
+      max-width: 800px;
+      margin: 0 auto;
+      color: #ffffff;
+    }
+
+    /* === Chat Container === */
+    .chat-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #cfcfcf; /* Brighter chat box for contrast */
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.12);
+      padding: 20px;
+      margin-top: 30px;
+    }
+
+    .chat-history {
+      height: 500px;
+      overflow-y: auto;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .message {
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 8px;
+      max-width: 70%;
+      font-size: 0.95em;
+    }
+
+    .user-message {
+      background: var(--user-bubble);
+      color: white;
+      margin-left: auto;
+    }
+
+    .bot-message {
+      background: var(--bot-bubble);
+      color: #222;
+      margin-right: auto;
+    }
+
+    /* === Input Section === */
+    .input-container {
+      display: flex;
+      gap: 10px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+
+    button {
+      padding: 12px 24px;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    /* === Suggestion Buttons === */
+    .suggestion-buttons {
+      margin-top: 15px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .suggestion-buttons .suggest-btn {
+      padding: 8px 16px;
+      background-color: #f7f7f7;
+      color: #333;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      font-size: 0.9em;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .suggestion-buttons .suggest-btn:hover {
+      background-color: #ddd;
+    }
+
+    /* === FAQ Section === */
+    .qa-section {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #c6c6c6;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .qa-section h3 {
+      color: var(--primary-color);
+    }
+
+    .qa-item {
+      margin-bottom: 15px;
+    }
+
+    .qa-item strong {
+      display: block;
+      color: #333;
+    }
+
+    .qa-item span {
+      color: #666;
+    }
+
+    /* === Footer === */
+    footer {
+      background-color: #848484;
+      padding: 10px 20px;
+      text-align: center;
+      font-size: 14px;
+      color: #555;
+      border-top: 1px solid #ddd;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top Navigation Bar -->
+  <div class="navbar">
+    <h1>Smart Travel Assistant</h1>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Plans</a>
+      <a href="#">Help</a>
+    </div>
+  </div>
+
+  <!-- Header Section with Logo and Course Code -->
+  <div class="header">
+    <img src="logo-long-full.jpg" alt="Logo" class="logo-placeholder">
+    <div class="course-code">COS60011</div>
+  </div>
+
+  <!-- Welcome Text Block -->
+  <div class="main-content">
+    <h2>Smart Help for Smart Travellers</h2>
+    <p>Your personal travel insurance guide — ask anything about your policy, claims, or what’s covered before you go!</p>
+  </div>
+
+  <!-- Chat UI Section -->
+  <div class="chat-container">
+    <!-- Chat history area -->
+    <div class="chat-history" id="chatHistory">
+      <div class="message bot-message">
+        Welcome to the Smart Travel Insurance Assistant! How can I help you today?
+      </div>
+    </div>
+
+    <!-- User input + Send button -->
+    <div class="input-container">
+      <input type="text" id="userInput" placeholder="Ask me about coverage, claims, or emergencies...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <!-- Suggested quick-question buttons -->
+    <div class="suggestion-buttons">
+      <button class="suggest-btn" onclick="handleSuggestion('What types of insurance are available?')">Insurance Types</button>
+      <button class="suggest-btn" onclick="handleSuggestion('How do I file a claim?')">Claims Process</button>
+      <button class="suggest-btn" onclick="handleSuggestion('What is covered in the standard plan?')">Coverage Details</button>
+    </div>
+  </div>
+
+  <!-- FAQ section with static Q&A -->
+  <div class="qa-section">
+    <h3>Frequently Asked Questions</h3>
+    <div class="qa-item">
+      <strong>Do you cover adventure sports?</strong>
+      <span>Yes, but you need to select the “High-Risk Sports” add-on.</span>
+    </div>
+    <div class="qa-item">
+      <strong>Can I claim if my flight is delayed?</strong>
+      <span>Yes, delays over 6 hours are usually eligible for compensation.</span>
+    </div>
+    <div class="qa-item">
+      <strong>How do I contact support abroad?</strong>
+      <span>Call the global hotline listed in your policy email or use this as
