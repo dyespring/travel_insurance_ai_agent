@@ -24,9 +24,13 @@ def preprocessing(gender: str, des: str):
     # populate id
     dt['id'] = range(len(dt))
     dt = dt[['id'] + [col for col in dt.columns if col != 'id']]
-    print(dt)
 
     return dt
+
+def getDestination():
+    dt = pd.read_csv("travel-insurance.csv");
+
+    return sorted(dt['Destination'].unique())
 
 #test
 if __name__ == "__main__":

@@ -7,7 +7,7 @@ from collections import Counter
 
 class sentiment:
     # ⚙️ Embed your API key here once:
-    SERP_API_KEY = "e236059e8ddc733ce7e2957365020e879106a4bbe69a22a5e65a4c6cc31dd726"
+    SERP_API_KEY = "e84e37dc62a3e9af52b5fd44cd2b813ecbca449d63815548f86fba6817f8f001"
 
     def __init__(
         self,

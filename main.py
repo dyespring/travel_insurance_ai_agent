@@ -3,7 +3,8 @@ import json
 from dotenv import load_dotenv
 
 from flask import Flask, render_template, request, jsonify
-# from src.travel_insurance_agent.tools.vector_search_tools import WeaviateVectorSearchTool
+from src.components.rec_system.recommend import recommend
+from src.components.rec_system.preprocessing import getDestination
 
 # from chat import get_response
 
@@ -19,23 +20,46 @@ load_dotenv()
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    options = getDestination()
+    return render_template("index.html", options=options)
 
-# @app.route("/predict", methods=["POST"])
-# def predict():
-#     load_dotenv()
-#     tool = WeaviateVectorSearchTool(
-#         weaviate_cluster_url=os.getenv("WEAVIATE_URL"),
-#         weaviate_api_key=os.getenv("WEAVIATE_API_KEY"),
-#         collection_name="insurance_data_system_2",
-#     )
-#     destination = request.form.get("destination")
-#     duration = request.form.get("duration")
-#     gender = request.form.get("gender")
-#     age = request.form.get("age")
-#     result = tool.run("Find me similar insurance package with destination: " + destination +
-#     ", Duration: " + duration + ", gender: " + gender + ", age: " + age)
-#     return render_template('predict.html', result=result) 
+@app.route("/predict", methods=["POST"])
+def predict():
+    destination = request.form.get("destination")
+    duration = request.form.get("duration")
+    gender = request.form.get("gender")
+    age = request.form.get("age")
+   
+    result = recommend(gender, destination, duration, age)
+
+    # now get reviews
+   
+    with open("reviews.json", "r") as f:
+        review_data = json.load(f)
+
+    review_lookup = {entry["company_name"]: entry for entry in review_data}
+    for r in result:
+        agency = r.get("Agency")
+        review = review_lookup.get(agency)
+        if review:
+            r.update({
+                "average_rating": review["average_rating"],
+                "positive": review["positive"],
+                "neutral": review["neutral"],
+                "negative": review["negative"],
+                "summary": review["summary"]
+            })
+        else:
+            # fallback if review not found
+            r.update({
+                "average_rating": "N/A",
+                "positive": 0,
+                "neutral": 0,
+                "negative": 0,
+                "summary": "No reviews available."
+            })
+    
+    return render_template('predict.html', result=result) 
 
 
 # @app.route("/chat", methods=["POST"])
@@ -45,4 +69,4 @@ def home():
 #     return jsonify({"answer": response})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=8000, debug=True)

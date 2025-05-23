@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}"
+  />
 
   <head>
     <meta charset="UTF-8" />
@@ -15,9 +18,9 @@
           type="number"
           id="age"
           name="age"
-          min="18"
-          max="90"
-          placeholder="Between 18 and 90"
+          min="10"
+          max="80"
+          placeholder="Between 10 and 80"
           required
         />
 
@@ -51,13 +54,11 @@
           required
         /> -->
         <label for="destination">Destination</label>
-        <input
-          type="text"
-          id="destination"
-          name="destination"
-          placeholder="Enter destination"
-          required
-        />
+        <select id="destination" name="destination" required>
+          {% for item in options %}
+          <option value="{{ item }}">{{ item }}</option>
+          {% endfor %}
+        </select>
 
         <!-- <label for="destination">Destination</label>
         <select id="destination" name="destination" required>
