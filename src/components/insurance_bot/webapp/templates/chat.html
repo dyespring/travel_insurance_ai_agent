@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insurance Chatbot</title>
+    <style>
+      body {
+        font-family: Arial;
+        margin: 40px;
+      }
+      #chatbox {
+        width: 100%;
+        height: 300px;
+        overflow-y: scroll;
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
+      #userinput {
+        width: 80%;
+        padding: 10px;
+      }
+      #send {
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Insurance Chatbot (LLM + Rules)</h2>
+
+    <div id="chatbox"></div>
+    <input id="userinput" type="text" placeholder="Type your question..." />
+    <button id="send">Send</button>
+
+    <script>
+      const chatbox = document.getElementById("chatbox");
+      const input = document.getElementById("userinput");
+      const sendBtn = document.getElementById("send");
+
+      sendBtn.onclick = () => {
+        const msg = input.value;
+        if (!msg) return;
+
+        chatbox.innerHTML += `<div><b>You:</b> ${msg}</div>`;
+        input.value = "";
+
+        fetch("/ask", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: `message=${encodeURIComponent(msg)}`,
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            chatbox.innerHTML += `<div><b>Bot:</b> ${data.response}</div>`;
+            chatbox.scrollTop = chatbox.scrollHeight;
+          });
+      };
+    </script>
+  </body>
+</html>

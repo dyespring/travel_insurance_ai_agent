@@ -3,6 +3,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipe
 from torch.nn.functional import softmax
 from collections import Counter
 import torch
+import os
 
 # === STEP 1: Get provider_id and summary metadata ===
 def get_data_id(query, api_key):
