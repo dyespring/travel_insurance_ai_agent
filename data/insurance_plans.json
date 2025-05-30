@@ -1,0 +1,261 @@
+[
+  {
+    "plan_id": "ADV-2024-001",
+    "name": "Adventure Explorer Pro",
+    "insurer": "Global Shield",
+    "price_per_week": 52.50,
+    "currency": "USD",
+    "covered_regions": ["Southeast Asia", "South America", "Oceania"],
+    "age_range": [18, 65],
+    "activities": ["scuba", "trekking", "skydiving", "skiing"],
+    "coverage": {
+      "medical": 1000000,
+      "evacuation": true,
+      "covid": true,
+      "baggage": 2000,
+      "trip_cancellation": 5000,
+      "adventure_sports": true
+    },
+    "exclusions": ["professional competitions", "war zones"],
+    "rating": 4.7,
+    "claim_approval_rate": 92,
+    "highlights": [
+      "24/7 adventure sports helpline",
+      "No medical certificate required under age 50"
+    ],
+    "icon": "global_shield.png"
+  },
+  {
+    "plan_id": "FAM-2024-002",
+    "name": "Family Safe Plus",
+    "insurer": "Allianz Travel",
+    "price_per_week": 45.00,
+    "currency": "USD",
+    "covered_regions": ["Worldwide"],
+    "age_range": [0, 80],
+    "activities": [],
+    "coverage": {
+      "medical": 500000,
+      "evacuation": true,
+      "covid": true,
+      "baggage": 1000,
+      "trip_cancellation": 3000,
+      "child_care": true,
+      "preexisting_conditions": false
+    },
+    "exclusions": ["extreme sports"],
+    "rating": 4.5,
+    "claim_approval_rate": 95,
+    "highlights": [
+      "Free coverage for 2 children under 12",
+      "Pediatric telemedicine included"
+    ],
+    "icon": "allianz.png"
+  },
+  {
+    "plan_id": "BUD-2024-003",
+    "name": "Budget Travel Basic",
+    "insurer": "SafetyWing",
+    "price_per_week": 28.75,
+    "currency": "USD",
+    "covered_regions": ["Europe", "North America"],
+    "age_range": [18, 70],
+    "activities": [],
+    "coverage": {
+      "medical": 250000,
+      "evacuation": false,
+      "covid": false,
+      "baggage": 500,
+      "trip_cancellation": 1000
+    },
+    "exclusions": ["adventure sports", "pandemics"],
+    "rating": 3.9,
+    "claim_approval_rate": 88,
+    "highlights": [
+      "Pay weekly or monthly",
+      "Cancel anytime"
+    ],
+    "icon": "safetywing.png"
+  },
+  {
+    "plan_id": "SEN-2024-004",
+    "name": "Senior Guardian Gold",
+    "insurer": "Medicare Travel",
+    "price_per_week": 68.90,
+    "currency": "USD",
+    "covered_regions": ["Worldwide"],
+    "age_range": [60, 85],
+    "activities": ["light hiking", "swimming"],
+    "coverage": {
+      "medical": 750000,
+      "evacuation": true,
+      "covid": true,
+      "baggage": 1500,
+      "trip_cancellation": 4000,
+      "preexisting_conditions": true
+    },
+    "exclusions": ["contact sports"],
+    "rating": 4.3,
+    "claim_approval_rate": 90,
+    "highlights": [
+      "No upper age limit",
+      "Chronic condition coverage"
+    ],
+    "icon": "medicare.png"
+  },
+  {
+    "plan_id": "BUS-2024-005",
+    "name": "Business Travel Elite",
+    "insurer": "AIG TravelGuard",
+    "price_per_week": 85.00,
+    "currency": "USD",
+    "covered_regions": ["Worldwide"],
+    "age_range": [21, 70],
+    "activities": [],
+    "coverage": {
+      "medical": 2000000,
+      "evacuation": true,
+      "covid": true,
+      "baggage": 3000,
+      "trip_cancellation": 10000,
+      "electronics": 2000,
+      "rental_car": true
+    },
+    "exclusions": ["leisure activities"],
+    "rating": 4.8,
+    "claim_approval_rate": 96,
+    "highlights": [
+      "Same-day claim processing",
+      "Dedicated business traveler support"
+    ],
+    "icon": "aig.png"
+  },
+  {
+    "plan_id": "STD-2024-006",
+    "name": "Standard Travel Protect",
+    "insurer": "World Nomads",
+    "price_per_week": 38.50,
+    "currency": "USD",
+    "covered_regions": ["Worldwide"],
+    "age_range": [18, 69],
+    "activities": ["surfing", "snorkeling"],
+    "coverage": {
+      "medical": 300000,
+      "evacuation": true,
+      "covid": true,
+      "baggage": 750,
+      "trip_cancellation": 2000
+    },
+    "exclusions": ["professional sports"],
+    "rating": 4.2,
+    "claim_approval_rate": 89,
+    "highlights": [
+      "Covers 150+ adventure activities",
+      "Extend while traveling"
+    ],
+    "icon": "world_nomads.png"
+  },
+  {
+    "plan_id": "LUX-2024-007",
+    "name": "Platinum Global Coverage",
+    "insurer": "AXA Premium",
+    "price_per_week": 120.00,
+    "currency": "USD",
+    "covered_regions": ["Worldwide"],
+    "age_range": [0, 80],
+    "activities": ["golf", "scuba", "skiing"],
+    "coverage": {
+      "medical": 5000000,
+      "evacuation": true,
+      "covid": true,
+      "baggage": 5000,
+      "trip_cancellation": 15000,
+      "concierge": true
+    },
+    "exclusions": [],
+    "rating": 4.9,
+    "claim_approval_rate": 98,
+    "highlights": [
+      "Private jet evacuation",
+      "5-star hospital guarantees"
+    ],
+    "icon": "axa.png"
+  },
+  {
+    "plan_id": "STU-2024-008",
+    "name": "Student Backpacker",
+    "insurer": "HeyMondo",
+    "price_per_week": 22.90,
+    "currency": "USD",
+    "covered_regions": ["Worldwide"],
+    "age_range": [18, 35],
+    "activities": ["hiking", "volunteering"],
+    "coverage": {
+      "medical": 100000,
+      "evacuation": false,
+      "covid": true,
+      "baggage": 300,
+      "trip_cancellation": 500
+    },
+    "exclusions": ["expensive electronics"],
+    "rating": 3.8,
+    "claim_approval_rate": 85,
+    "highlights": [
+      "Discount for student ID",
+      "Covers volunteer work"
+    ],
+    "icon": "heymondo.png"
+  },
+  {
+    "plan_id": "CRU-2024-009",
+    "name": "Cruise Specialist",
+    "insurer": "Nationwide",
+    "price_per_week": 55.25,
+    "currency": "USD",
+    "covered_regions": ["Caribbean", "Mediterranean", "Alaska"],
+    "age_range": [0, 90],
+    "activities": ["kayaking", "snorkeling"],
+    "coverage": {
+      "medical": 750000,
+      "evacuation": true,
+      "covid": true,
+      "baggage": 2000,
+      "trip_cancellation": 7500,
+      "missed_port": 1000
+    },
+    "exclusions": ["shore excursions"],
+    "rating": 4.4,
+    "claim_approval_rate": 93,
+    "highlights": [
+      "Covers cabin confinement",
+      "Missed port compensation"
+    ],
+    "icon": "nationwide.png"
+  },
+  {
+    "plan_id": "DIG-2024-010",
+    "name": "Digital Nomad",
+    "insurer": "Genki",
+    "price_per_week": 42.00,
+    "currency": "USD",
+    "covered_regions": ["Worldwide"],
+    "age_range": [18, 60],
+    "activities": ["coworking"],
+    "coverage": {
+      "medical": 300000,
+      "evacuation": true,
+      "covid": true,
+      "baggage": 1000,
+      "electronics": 1500,
+      "trip_cancellation": 2000
+    },
+    "exclusions": ["high-risk sports"],
+    "rating": 4.1,
+    "claim_approval_rate": 87,
+    "highlights": [
+      "Covers laptop and camera gear",
+      "1-month minimum duration"
+    ],
+    "icon": "genki.png"
+  }
+]

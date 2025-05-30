@@ -1,0 +1,201 @@
+[
+  {
+    "user_id": "U1001",
+    "name": "Alex Chen",
+    "age": 28,
+    "gender": "M",
+    "traveler_type": "Adventure Seeker",
+    "frequent_destinations": ["Thailand", "Peru", "New Zealand"],
+    "upcoming_trip": {
+      "destination": "Costa Rica",
+      "duration_weeks": 2,
+      "activities": ["scuba", "zip-lining", "volcano hiking"],
+      "budget_range": [40, 70]
+    },
+    "insurance_preferences": {
+      "priority": "adventure_coverage",
+      "dislikes": "complex claims process",
+      "past_claims": ["lost equipment in 2023"]
+    },
+    "risk_profile": "High"
+  },
+  {
+    "user_id": "U1002",
+    "name": "Sophie Martin",
+    "age": 34,
+    "gender": "F",
+    "traveler_type": "Family Traveler",
+    "frequent_destinations": ["France", "Japan"],
+    "upcoming_trip": {
+      "destination": "Disney World, USA",
+      "duration_weeks": 1,
+      "travelers": [
+        {"age": 34, "relation": "self"},
+        {"age": 7, "relation": "child"},
+        {"age": 5, "relation": "child"}
+      ],
+      "budget_range": [30, 50]
+    },
+    "insurance_preferences": {
+      "priority": "child_medical_coverage",
+      "notes": "Need cancel-for-any-reason option"
+    },
+    "risk_profile": "Medium"
+  },
+  {
+    "user_id": "U1003",
+    "name": "Raj Patel",
+    "age": 45,
+    "gender": "M",
+    "traveler_type": "Business Traveler",
+    "frequent_destinations": ["Germany", "China", "UAE"],
+    "upcoming_trip": {
+      "destination": "Singapore",
+      "duration_weeks": 1,
+      "purpose": "Tech conference",
+      "electronics_value": 3500,
+      "budget_range": [60, 100]
+    },
+    "insurance_preferences": {
+      "priority": "electronics_coverage",
+      "airline_status": "Gold"
+    },
+    "risk_profile": "Low"
+  },
+  {
+    "user_id": "U1004",
+    "name": "Elena Rodriguez",
+    "age": 62,
+    "gender": "F",
+    "traveler_type": "Retiree",
+    "frequent_destinations": ["Italy", "Greece"],
+    "upcoming_trip": {
+      "destination": "Portugal",
+      "duration_weeks": 3,
+      "health_concerns": ["hypertension"],
+      "budget_range": [35, 55]
+    },
+    "insurance_preferences": {
+      "priority": "preexisting_conditions",
+      "medications": ["Lisinopril", "Atorvastatin"]
+    },
+    "risk_profile": "Medium"
+  },
+  {
+    "user_id": "U1005",
+    "name": "Jordan Smith",
+    "age": 19,
+    "gender": "NB",
+    "traveler_type": "Backpacker",
+    "frequent_destinations": ["Mexico", "Vietnam"],
+    "upcoming_trip": {
+      "destination": "Colombia",
+      "duration_weeks": 8,
+      "accommodation": "hostels",
+      "activities": ["trekking", "spanish_classes"],
+      "budget_range": [15, 30]
+    },
+    "insurance_preferences": {
+      "priority": "long_term_coverage",
+      "notes": "Need monthly payment option"
+    },
+    "risk_profile": "High"
+  },
+  {
+    "user_id": "U1006",
+    "name": "Yuki Tanaka",
+    "age": 29,
+    "gender": "F",
+    "traveler_type": "Luxury Traveler",
+    "frequent_destinations": ["Maldives", "Switzerland"],
+    "upcoming_trip": {
+      "destination": "Bora Bora",
+      "duration_weeks": 2,
+      "accommodation": "5-star_resort",
+      "budget_range": [100, 200],
+      "valuables": ["designer_bags", "jewelry"]
+    },
+    "insurance_preferences": {
+      "priority": "cancel_for_any_reason",
+      "notes": "Private villa coverage required"
+    },
+    "risk_profile": "Low"
+  },
+  {
+    "user_id": "U1007",
+    "name": "David Wilson",
+    "age": 50,
+    "gender": "M",
+    "traveler_type": "Cruise Enthusiast",
+    "frequent_destinations": ["Caribbean", "Alaska"],
+    "upcoming_trip": {
+      "destination": "Mediterranean Cruise",
+      "duration_weeks": 2,
+      "ports": ["Spain", "France", "Italy"],
+      "budget_range": [50, 80]
+    },
+    "insurance_preferences": {
+      "priority": "missed_port_coverage",
+      "past_issues": ["seasickness_emergency"]
+    },
+    "risk_profile": "Medium"
+  },
+  {
+    "user_id": "U1008",
+    "name": "Aisha Johnson",
+    "age": 26,
+    "gender": "F",
+    "traveler_type": "Digital Nomad",
+    "frequent_destinations": ["Bali", "Portugal"],
+    "upcoming_trip": {
+      "destination": "Thailand",
+      "duration_weeks": 12,
+      "work_equipment": ["macbook_pro", "mirrorless_camera"],
+      "budget_range": [25, 40]
+    },
+    "insurance_preferences": {
+      "priority": "electronics_coverage",
+      "notes": "Need coworking space liability"
+    },
+    "risk_profile": "Medium"
+  },
+  {
+    "user_id": "U1009",
+    "name": "Carlos Mendez",
+    "age": 33,
+    "gender": "M",
+    "traveler_type": "Solo Adventurer",
+    "frequent_destinations": ["Nepal", "Patagonia"],
+    "upcoming_trip": {
+      "destination": "Iceland",
+      "duration_weeks": 3,
+      "activities": ["glacier_hiking", "northern_lights_tours"],
+      "budget_range": [45, 65]
+    },
+    "insurance_preferences": {
+      "priority": "search_and_rescue",
+      "allergies": ["penicillin"]
+    },
+    "risk_profile": "High"
+  },
+  {
+    "user_id": "U1010",
+    "name": "Olivia Kim",
+    "age": 41,
+    "gender": "F",
+    "traveler_type": "Group Travel Organizer",
+    "frequent_destinations": ["Morocco", "Croatia"],
+    "upcoming_trip": {
+      "destination": "Japan",
+      "duration_weeks": 2,
+      "group_size": 8,
+      "activities": ["cherry_blossom_tours", "onsen_visits"],
+      "budget_range": [40, 60]
+    },
+    "insurance_preferences": {
+      "priority": "group_discount",
+      "notes": "Need coverage for pre-existing knee injury"
+    },
+    "risk_profile": "Medium"
+  }
+]

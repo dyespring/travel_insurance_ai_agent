@@ -1,0 +1,152 @@
+[
+  {
+    "country": "Thailand",
+    "iso_code": "TH",
+    "risk_level": "Medium",
+    "covid_requirements": {
+      "vaccination_proof": true,
+      "pcr_test": false,
+      "insurance_required": true
+    },
+    "health_risks": ["Dengue", "Rabies"],
+    "safety_risks": ["Petty theft", "Scams"],
+    "advisory": "Exercise normal precautions. Be wary of unlicensed tour operators in coastal areas.",
+    "last_updated": "2024-06-15",
+    "medical_rating": 3.8
+  },
+  {
+    "country": "Japan",
+    "iso_code": "JP",
+    "risk_level": "Low",
+    "covid_requirements": {
+      "vaccination_proof": false,
+      "pcr_test": false,
+      "insurance_required": false
+    },
+    "health_risks": ["Seasonal flu"],
+    "safety_risks": ["Earthquakes"],
+    "advisory": "Very safe. Note that some medications containing pseudoephedrine are prohibited.",
+    "last_updated": "2024-05-20",
+    "medical_rating": 4.9
+  },
+  {
+    "country": "Brazil",
+    "iso_code": "BR",
+    "risk_level": "High",
+    "covid_requirements": {
+      "vaccination_proof": true,
+      "pcr_test": true,
+      "insurance_required": true
+    },
+    "health_risks": ["Yellow fever", "Zika"],
+    "safety_risks": ["Violent crime", "Kidnapping"],
+    "advisory": "Avoid favelas and unmarked taxis. Yellow fever vaccination recommended for rural areas.",
+    "last_updated": "2024-06-10",
+    "medical_rating": 3.2
+  },
+  {
+    "country": "Australia",
+    "iso_code": "AU",
+    "risk_level": "Low",
+    "covid_requirements": {
+      "vaccination_proof": false,
+      "pcr_test": false,
+      "insurance_required": false
+    },
+    "health_risks": ["Sun exposure", "Jellyfish"],
+    "safety_risks": ["Remote area risks"],
+    "advisory": "Carry ample water when traveling in outback regions. Swim between flags at beaches.",
+    "last_updated": "2024-04-05",
+    "medical_rating": 4.7
+  },
+  {
+    "country": "India",
+    "iso_code": "IN",
+    "risk_level": "High",
+    "covid_requirements": {
+      "vaccination_proof": false,
+      "pcr_test": false,
+      "insurance_required": false
+    },
+    "health_risks": ["Delhi belly", "Malaria"],
+    "safety_risks": ["Air pollution", "Traffic accidents"],
+    "advisory": "Drink only bottled water. Avoid street food unless freshly cooked. Higher risk for solo female travelers.",
+    "last_updated": "2024-06-01",
+    "medical_rating": 2.9
+  },
+  {
+    "country": "Italy",
+    "iso_code": "IT",
+    "risk_level": "Medium",
+    "covid_requirements": {
+      "vaccination_proof": false,
+      "pcr_test": false,
+      "insurance_required": false
+    },
+    "health_risks": ["Heat waves"],
+    "safety_risks": ["Pickpocketing"],
+    "advisory": "Be vigilant for bag snatchers in tourist areas like Rome Termini station. Validate train tickets.",
+    "last_updated": "2024-05-30",
+    "medical_rating": 4.3
+  },
+  {
+    "country": "South Africa",
+    "iso_code": "ZA",
+    "risk_level": "High",
+    "covid_requirements": {
+      "vaccination_proof": false,
+      "pcr_test": false,
+      "insurance_required": true
+    },
+    "health_risks": ["Malaria", "HIV exposure"],
+    "safety_risks": ["Carjackings", "Home invasions"],
+    "advisory": "Do not stop at deserted roadside areas. Keep valuables hidden. Malaria prophylaxis needed in Mpumalanga.",
+    "last_updated": "2024-06-12",
+    "medical_rating": 3.5
+  },
+  {
+    "country": "Canada",
+    "iso_code": "CA",
+    "risk_level": "Low",
+    "covid_requirements": {
+      "vaccination_proof": false,
+      "pcr_test": false,
+      "insurance_required": false
+    },
+    "health_risks": ["Winter hypothermia"],
+    "safety_risks": ["Wildlife encounters"],
+    "advisory": "Carry bear spray when hiking in national parks. Emergency response may be slow in remote areas.",
+    "last_updated": "2024-03-15",
+    "medical_rating": 4.8
+  },
+  {
+    "country": "Egypt",
+    "iso_code": "EG",
+    "risk_level": "Medium",
+    "covid_requirements": {
+      "vaccination_proof": false,
+      "pcr_test": false,
+      "insurance_required": false
+    },
+    "health_risks": ["Hepatitis A", "Traveler's diarrhea"],
+    "safety_risks": ["Terrorism", "Scams"],
+    "advisory": "Avoid Sinai Peninsula (except Sharm El-Sheikh airport). Haggle for taxi fares upfront.",
+    "last_updated": "2024-05-22",
+    "medical_rating": 3.0
+  },
+  {
+    "country": "New Zealand",
+    "iso_code": "NZ",
+    "risk_level": "Low",
+    "covid_requirements": {
+      "vaccination_proof": false,
+      "pcr_test": false,
+      "insurance_required": false
+    },
+    "health_risks": ["Sunburn"],
+    "safety_risks": ["Adventure sport injuries"],
+    "advisory": "Check adventure operator safety certifications. UV radiation levels are extreme in summer.",
+    "last_updated": "2024-04-18",
+    "medical_rating": 4.6
+  }
+]
