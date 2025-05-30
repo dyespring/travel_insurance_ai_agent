@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Travel Insurance Assistant - COS60011</title>
+  <link rel="stylesheet" href="../views_style/styles/chatbot_style.css">
+  
+</head>
+
+<body>
+  <!-- Header -->
+  <div class="header">
+    <img src="../views_style/images/logo-long-full.jpg" alt="Logo" class="logo">
+    <h1 class="Agent-slogan">Smart Help for Smart Travellers</h1>
+    <div class="course-code">COS60011</div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="navbar">
+    <h1>Smart Travel Assistant</h1>
+    <div class="nav-links">
+      <a href="http://localhost:8888/recommend">Recommendation</a>
+      <!-- <a href="#">Plans</a> -->
+      <!-- <a href="#">Help</a> -->
+    </div>
+  </div>
+
+    <!-- Login Button and User Info -->
+    <div class="login-container">
+      <div id="userInfo" class="user-info">
+        <span id="userGreeting"></span>
+        <button class="logout-button" onclick="logout()">Logout</button>
+      </div>
+      <button id="loginButton" class="login-button" onclick="toggleLoginForm()">Login</button>
+      <div id="loginForm" class="login-form">
+        <h4>Travel Profile Login</h4>
+        <p>No password needed - just your name</p>
+        <input type="text" id="firstName" placeholder="First Name" required>
+        <input type="text" id="lastName" placeholder="Last Name" required>
+        <button onclick="login()" style="width: 100%">Continue</button>
+        <div id="loginError" class="error-message" style="display: none; margin-top: 10px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Welcome Section -->
+  <div class="main-content">
+    <p>Your personal travel insurance guide — ask anything about your policy, claims, or what's covered before you go!</p>
+  </div>
+
+  <!-- Chat UI -->
+  <div class="chat-container">
+    <div class="chat-history" id="chatHistory">
+      <div class="message bot-message">
+        Welcome to the Smart Travel Insurance Assistant! I can help with questions about coverage, claims, and policy details. 
+        <!-- <span class="timestamp">--:--</span> -->
+      </div>
+    </div>
+
+    <div class="input-container">
+      <input type="text" id="userInput" placeholder="Ask me about coverage, claims, or emergencies...">
+      <button id="sendButton" onclick="sendMessage()">Send</button>
+    </div>
+
+    <!-- <div class="suggestion-buttons">
+      <button class="suggest-btn" onclick="handleSuggestion('What types of travel insurance do you offer?')">Insurance Types</button>
+      <button class="suggest-btn" onclick="handleSuggestion('How do I file a claim for lost luggage?')">Claims Process</button>
+      <button class="suggest-btn" onclick="handleSuggestion('What medical expenses are covered in the standard plan?')">Coverage Details</button>
+    </div> -->
+  </div>
+
+  <!-- FAQ -->
+  <div class="qa-section">
+    <h3>Frequently Asked Questions</h3>
+    <div class="qa-item">
+      <strong>Do you cover adventure sports?</strong>
+      <span>Yes, but you need to select the "High-Risk Sports" add-on.</span>
+    </div>
+    <div class="qa-item">
+      <strong>Can I claim if my flight is delayed?</strong>
+      <span>Yes, delays over 6 hours are usually eligible for compensation.</span>
+    </div>
+    <div class="qa-item">
+      <strong>How do I contact support abroad?</strong>
+      <span>Call the global hotline listed in your policy email or use this assistant for non-urgent help.</span>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Smart Travel Insurance Assistant. All rights reserved.
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // API Configuration
+    const RAG_API_URL = 'http://localhost:8888/api/chat';
+    const LOGIN_API_URL = 'http://localhost:8888/api/login';
+    const LOGOUT_API_URL = 'http://localhost:8888/api/logout';
+    const USER_STATUS_URL = 'http://localhost:8888/api/user/status';
+    
+    // Global user state
+    let currentUser = null;
+    
+    // Get current time in HH:mm format
+    function getCurrentTime() {
+      const now = new Date();
+      return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    // Add a message to the chat window with timestamp
+    function addMessage(text, sender) {
+      const history = document.getElementById('chatHistory');
+      const messageDiv = document.createElement('div');
+      
+      // Determine message class based on sender
+      let messageClass;
+      if (sender === 'user') {
+        messageClass = 'user-message';
+      } else if (sender === 'error') {
+        messageClass = 'error-message';
+      } else {
+        messageClass = 'bot-message';
+      }
+      
+      messageDiv.className = `message ${messageClass}`;
+      
+      let messageContent = text;
+      
+      messageDiv.innerHTML = `
+        ${messageContent}
+        <span class="timestamp">${getCurrentTime()}</span>
+      `;
+      
+      history.appendChild(messageDiv);
+      history.scrollTop = history.scrollHeight;
+    }
+
+    // Show typing indicator
+    function showTypingIndicator() {
+      const history = document.getElementById('chatHistory');
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'typing-indicator-container';
+      typingDiv.id = 'typingIndicator';
+      typingDiv.innerHTML = `
+        <span class="typing-indicator">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <span class="timestamp">${getCurrentTime()}</span>
+      `;
+      history.appendChild(typingDiv);
+      history.scrollTop = history.scrollHeight;
+    }
+
+    // Hide typing indicator
+    function hideTypingIndicator() {
+      const typingIndicator = document.getElementById('typingIndicator');
+      if (typingIndicator) {
+        typingIndicator.remove();
+      }
+    }
+
+    // Call RAG backend API with user context
+    async function getRAGResponse(userMessage) {
+      try {
+        const response = await fetch(RAG_API_URL, {
+          method: 'POST',
+          credentials: 'include', // Important for session cookies
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify({
+            question: userMessage
+            // User context now comes from server-side session
+          }),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || `API request failed with status ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        if (data.error) {
+          throw new Error(data.error);
+        }
+        
+        return {
+          response: data.answer,
+          userLoggedIn: data.user_logged_in,
+          userName: data.user_name
+        };
+      } catch (error) {
+        console.error('RAG API Error:', error);
+        throw error;
+      }
+    }
+
+    // Handle send button or Enter key
+    async function sendMessage() {
+      const input = document.getElementById('userInput');
+      const sendButton = document.getElementById('sendButton');
+      const userMessage = input.value.trim();
+      
+      if (!userMessage) {
+        addMessage("Please enter a question.", 'error');
+        return;
+      }
+
+      // Disable button and input during processing
+      sendButton.disabled = true;
+      input.disabled = true;
+      
+      addMessage(userMessage, 'user');
+      input.value = '';
+      
+      showTypingIndicator();
+      
+      try {
+        const reply = await getRAGResponse(userMessage);
+        hideTypingIndicator();
+        addMessage(reply.response, 'bot');
+        
+        // Update UI based on user login status
+        if (reply.userLoggedIn && reply.userName) {
+          console.log(`Response processed for logged-in user: ${reply.userName}`);
+        }
+      } catch (error) {
+        hideTypingIndicator();
+        addMessage(`⚠️ Error: ${error.message}`, 'error');
+      } finally {
+        sendButton.disabled = false;
+        input.disabled = false;
+        input.focus();
+      }
+    }
+
+    // Handle suggestion button click
+    function handleSuggestion(text) {
+      document.getElementById('userInput').value = text;
+      sendMessage();
+    }
+
+    // Enable sending by pressing Enter key
+    document.getElementById('userInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+
+    // Login functions
+    function toggleLoginForm() {
+      const form = document.getElementById('loginForm');
+      const loginError = document.getElementById('loginError');
+      
+      if (form.style.display === 'block') {
+        form.style.display = 'none';
+        loginError.style.display = 'none';
+      } else {
+        form.style.display = 'block';
+        // Clear any previous errors
+        loginError.style.display = 'none';
+        loginError.textContent = '';
+        // Focus on first name input
+        document.getElementById('firstName').focus();
+      }
+    }
+    
+    async function login() {
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName = document.getElementById('lastName').value.trim();
+      const loginError = document.getElementById('loginError');
+      
+      // Clear previous errors
+      loginError.style.display = 'none';
+      loginError.textContent = '';
+      
+      if (!firstName || !lastName) {
+        showLoginError('Please enter both first and last name');
+        return;
+      }
+      
+      try {
+        console.log('Attempting login with:', { firstName, lastName });
+        
+        const response = await fetch(LOGIN_API_URL, {
+          method: 'POST',
+          credentials: 'include', // Important for session cookies
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify({
+            first_name: firstName,
+            last_name: lastName,
+            full_name: `${firstName} ${lastName}`
+          }),
+        });
+
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.error || 'Login failed');
+        }
+        
+        if (data.status === 'success') {
+          currentUser = data.user;
+          console.log('Login successful:', data.user);
+          
+          updateUserUI();
+          toggleLoginForm();
+          
+          // Clear form
+          document.getElementById('firstName').value = '';
+          document.getElementById('lastName').value = '';
+          
+          // Welcome message
+          addMessage(`${data.message} How can I help with your travel plans today?`, 'bot');
+        } else {
+          throw new Error(data.message || 'Login failed');
+        }
+        
+      } catch (error) {
+        console.error('Login error:', error);
+        showLoginError(error.message || 'Login failed. Please try again.');
+      }
+    }
+    
+    function showLoginError(message) {
+      const loginError = document.getElementById('loginError');
+      loginError.textContent = message;
+      loginError.style.display = 'block';
+    }
+    
+    async function logout() {
+      try {
+        const response = await fetch(LOGOUT_API_URL, {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+        });
+
+        const data = await response.json();
+        
+        if (response.ok && data.status === 'success') {
+          currentUser = null;
+          updateUserUI();
+          addMessage("You've been logged out. Let me know if you need help with anything!", 'bot');
+          console.log('Logout successful');
+        } else {
+          throw new Error(data.error || 'Logout failed');
+        }
+        
+      } catch (error) {
+        console.error('Logout error:', error);
+        // Even if logout fails on server, clear client state
+        currentUser = null;
+        updateUserUI();
+        addMessage("You've been logged out locally. Let me know if you need help with anything!", 'bot');
+      }
+    }
+    
+    function updateUserUI() {
+      const loginButton = document.getElementById('loginButton');
+      const userInfo = document.getElementById('userInfo');
+      const userGreeting = document.getElementById('userGreeting');
+      
+      if (currentUser) {
+        loginButton.style.display = 'none';
+        userInfo.style.display = 'flex';
+        userGreeting.textContent = `Hi, ${currentUser.name.split(' ')[0]}`;
+      } else {
+        loginButton.style.display = 'block';
+        userInfo.style.display = 'none';
+      }
+    }
+
+    // Check user status on page load
+    async function checkUserStatus() {
+      try {
+        const response = await fetch(USER_STATUS_URL, {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Accept': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.logged_in && data.user) {
+            currentUser = data.user;
+            updateUserUI();
+            console.log('User session restored:', data.user.name);
+          } else {
+            currentUser = null;
+            updateUserUI();
+            console.log('No active user session');
+          }
+        }
+      } catch (error) {
+        console.error('Error checking user status:', error);
+        currentUser = null;
+        updateUserUI();
+      }
+    }
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', function() {
+      checkUserStatus();
+      
+      // Focus on input field
+      document.getElementById('userInput').focus();
+      
+      console.log('Travel Insurance Assistant initialized');
+    });
+  </script>
+
+</body>
+</html>
