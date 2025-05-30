@@ -1,0 +1,144 @@
+{
+  "activities": [
+    {
+      "activity": "Scuba Diving",
+      "coverage_level": "Adventure Plus",
+      "base_coverage": false,
+      "required_rider": true,
+      "rider_cost": "$15/week",
+      "depth_limit": "40 meters",
+      "requirements": "PADI certification proof",
+      "exclusions": ["Cave diving", "Technical diving"],
+      "claim_examples": [
+        "Equipment damage (max $2,000)",
+        "Decompression sickness treatment"
+      ]
+    },
+    {
+      "activity": "Skiing/Snowboarding",
+      "coverage_level": "Winter Sports",
+      "base_coverage": false,
+      "required_rider": true,
+      "rider_cost": "$20/week",
+      "terrain_limit": "On-piste only",
+      "requirements": "Helmet use recommended",
+      "exclusions": ["Backcountry skiing", "Competitions"],
+      "claim_examples": [
+        "Lift evacuation",
+        "Broken equipment (max $1,500)"
+      ]
+    },
+    {
+      "activity": "Rock Climbing",
+      "coverage_level": "Adventure Plus",
+      "base_coverage": false,
+      "required_rider": true,
+      "rider_cost": "$12/week",
+      "height_limit": "5.10 grade",
+      "requirements": "Certified guide required",
+      "exclusions": ["Free soloing", "Big wall climbing"],
+      "claim_examples": [
+        "Rescue operations",
+        "Equipment loss (max $1,000)"
+      ]
+    },
+    {
+      "activity": "Surfing",
+      "coverage_level": "Standard",
+      "base_coverage": true,
+      "required_rider": false,
+      "wave_height_limit": "4 meters",
+      "requirements": "None",
+      "exclusions": ["Professional competitions"],
+      "claim_examples": [
+        "Board damage (max $500)",
+        "Reef cuts treatment"
+      ]
+    },
+    {
+      "activity": "Bungee Jumping",
+      "coverage_level": "Extreme Sports",
+      "base_coverage": false,
+      "required_rider": true,
+      "rider_cost": "$25/jump",
+      "requirements": "Operator must be licensed",
+      "exclusions": ["Non-commercial jumps"],
+      "claim_examples": [
+        "Spinal injury treatment",
+        "Equipment failure claims"
+      ]
+    },
+    {
+      "activity": "Safari/Wildlife Viewing",
+      "coverage_level": "Standard",
+      "base_coverage": true,
+      "required_rider": false,
+      "vehicle_requirement": "Official guides only",
+      "exclusions": ["Walking safaris after dark"],
+      "claim_examples": [
+        "Emergency evacuation",
+        "Animal attack injuries"
+      ]
+    },
+    {
+      "activity": "Hot Air Ballooning",
+      "coverage_level": "Adventure Lite",
+      "base_coverage": false,
+      "required_rider": true,
+      "rider_cost": "$18/flight",
+      "requirements": "Commercial operators only",
+      "exclusions": ["Private balloon rides"],
+      "claim_examples": [
+        "Weather cancellation",
+        "Emergency landing injuries"
+      ]
+    },
+    {
+      "activity": "Cycling (Road)",
+      "coverage_level": "Standard",
+      "base_coverage": true,
+      "required_rider": false,
+      "distance_limit": "100km/day",
+      "requirements": "Helmet required for claims",
+      "exclusions": ["Competitive races"],
+      "claim_examples": [
+        "Accident medical bills",
+        "Bike theft (max $800)"
+      ]
+    },
+    {
+      "activity": "Parasailing",
+      "coverage_level": "Adventure Lite",
+      "base_coverage": false,
+      "required_rider": true,
+      "rider_cost": "$10/session",
+      "height_limit": "150 meters",
+      "requirements": "Commercial operators only",
+      "exclusions": ["Tandem flights"],
+      "claim_examples": [
+        "Equipment failure",
+        "Water landing injuries"
+      ]
+    },
+    {
+      "activity": "Hiking/Trekking",
+      "coverage_level": "Standard",
+      "base_coverage": true,
+      "required_rider": false,
+      "altitude_limit": "4,500 meters",
+      "requirements": "Registered route plans",
+      "exclusions": ["Glacier travel without guide"],
+      "claim_examples": [
+        "Search & rescue",
+        "Altitude sickness treatment"
+      ]
+    }
+  ],
+  "coverage_tiers": {
+    "Standard": "Included in base plans",
+    "Adventure Lite": "+$10-$20/week",
+    "Adventure Plus": "+$15-$25/week",
+    "Extreme Sports": "Case-by-case approval"
+  },
+  "disclaimer": "All claims require proof of safety precautions and operator licensing where applicable."
+}
