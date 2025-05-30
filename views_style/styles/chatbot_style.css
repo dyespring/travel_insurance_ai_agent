@@ -1,0 +1,371 @@
+
+    :root {
+      --primary-color: #FF0000;       /* Bright red for buttons */
+      --secondary-color: #252525;     /* Background color */
+      --dark-color: #414141;          /* Top nav background */
+      --user-bubble: #AF0404;         /* User chat bubble */
+      --bot-bubble: #f0f0f0;          /* Bot chat bubble */
+      --timestamp-color: #999999;     /* Timestamp text */
+      --rag-source-color: #e6f7ff;    /* Light blue for RAG sources */
+      --error-color: #ff6b6b;         /* Error message color */
+    }
+
+    /* === Base Page Styling === */
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      background-color: var(--secondary-color);
+    }
+
+    /* === Top Navigation Bar === */
+    .navbar {
+      background-color: var(--dark-color);
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar h1 {
+      margin: 0;
+      font-size: 1.5em;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+    }
+
+    /* === Header: Logo + Course Code === */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px 0 30px;
+    }
+
+    .logo {
+      width: 300px ;
+      height: 150px ;
+      border-radius: 10px ;
+    }
+
+    .course-code {
+      font-weight: bold;
+      font-size: 1.2em;
+      color: var(--primary-color);
+    }
+
+    .Agent-slogan {
+      font-size: 4rem;
+      color: var(--primary-color);
+  }
+
+
+    /* === Intro Text Section === */
+    .main-content {
+      padding: 30px;
+      text-align: center;
+      color: #f0f0f0;
+    }
+
+    .main-content h2 {
+      color: var(--primary-color);
+    }
+
+    .main-content p {
+      max-width: 800px;
+      margin: 0 auto;
+      color: #ccc;
+    }
+
+    /* === Chat UI Container === */
+    .chat-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fdfdfd;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.12);
+      padding: 20px;
+      margin-top: 30px;
+    }
+
+    .chat-history {
+      height: 500px;
+      overflow-y: auto;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .message {
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 8px;
+      max-width: 70%;
+      font-size: 0.95em;
+      position: relative;
+      white-space: pre-wrap; /* This is crucial for preserving newlines */
+      line-height: 1.6;
+    }
+
+    .user-message {
+      background: var(--user-bubble);
+      color: white;
+      margin-left: auto;
+    }
+
+    .bot-message {
+      background: var(--bot-bubble);
+      color: #222;
+      margin-right: auto;
+    }
+
+    .error-message {
+      background: var(--error-color);
+      color: white;
+      margin-right: auto;
+    }
+
+    .timestamp {
+      display: block;
+      font-size: 0.7em;
+      color: var(--timestamp-color);
+      margin-top: 4px;
+      text-align: right;
+    }
+
+    /* === RAG Source References === */
+    .rag-sources {
+      margin-top: 10px;
+      padding: 8px;
+      background-color: var(--rag-source-color);
+      border-radius: 5px;
+      font-size: 0.8em;
+    }
+
+    .rag-sources-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .rag-source-item {
+      margin-bottom: 3px;
+      padding-left: 10px;
+      border-left: 2px solid var(--primary-color);
+    }
+
+    /* === Input Section === */
+    .input-container {
+      display: flex;
+      gap: 10px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+
+    button {
+      padding: 12px 24px;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* === Loading Indicator === */
+    .typing-indicator {
+      display: inline-block;
+      padding-left: 5px;
+    }
+
+    .typing-indicator span {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #666;
+      margin-right: 3px;
+      animation: typing 1s infinite ease-in-out;
+    }
+
+    .typing-indicator span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-indicator span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes typing {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    /* === Suggested Questions === */
+    .suggestion-buttons {
+      margin-top: 15px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .suggestion-buttons .suggest-btn {
+      padding: 8px 16px;
+      background-color: #eeeeee;
+      color: #333;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      font-size: 0.9em;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .suggestion-buttons .suggest-btn:hover {
+      background-color: #ddd;
+    }
+
+    /* === Static FAQ Section === */
+    .qa-section {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .qa-section h3 {
+      color: var(--primary-color);
+    }
+
+    .qa-item {
+      margin-bottom: 15px;
+    }
+
+    .qa-item strong {
+      display: block;
+      color: #333;
+    }
+
+    .qa-item span {
+      color: #666;
+    }
+
+    /* === Footer === */
+    footer {
+      background-color: #000000;
+      padding: 10px 20px;
+      text-align: center;
+      font-size: 14px;
+      color: #959292;
+      border-top: 1px solid #ddd;
+      margin-top: 30px;
+    }
+  
+    /* Typing indicator styling */
+.typing-indicator-container {
+  padding: 10px 15px;
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+}
+
+.typing-indicator {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  background-color: #666;
+  border-radius: 50%;
+  display: inline-block;
+  animation: typingAnimation 1.4s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typingAnimation {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-5px); }
+}
+
+.login-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.login-button {
+  padding: 8px 16px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  opacity: 0.9;
+}
+
+.login-form {
+  display: none;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 100;
+}
+
+.login-form input {
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 200px;
+}
+
+.user-info {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  color: white;
+}
+
+.logout-button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  text-decoration: underline;
+}
